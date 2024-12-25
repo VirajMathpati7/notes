@@ -8,13 +8,21 @@
 </head>
 <body>
     <div class="container">
-        <h1>My GitHub Notes</h1>
+        <button id="backButton">Back</button>
         <div id="notesList" class="notes-list"></div>
     </div>
     <script>
-        // Fetching note filenames from the GitHub repository's main directory
-        fetch('https://api.github.com/repos/VirajMathpati7/notes/')
-            .then(response => response.json())
+        document.getElementById('backButton').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+
+        fetch('https://api.github.com/repos/virajmathpati7/notes/contents/notes')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
             .then(data => {
                 const notesList = document.getElementById('notesList');
                 notesList.innerHTML = '';  // Clear any existing notes
