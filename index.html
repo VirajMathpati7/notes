@@ -3,17 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Notes</title>
+    <title>My GitHub Notes</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <button id="accessNotesButton">Access My Notes</button>
+        <h1>My GitHub Notes</h1>
+        <div id="notesList" class="notes-list"></div>
     </div>
     <script>
-        document.getElementById('accessNotesButton').addEventListener('click', function() {
-            window.location.href = 'notes.html';
-        });
+        // Fetching note filenames from the GitHub repository's main directory
+        fetch('https://api.github.com/repos/VirajMathpati7/notes/')
+            .then(response => response.json())
+            .then(data => {
+                const notesList = document.getElementById('notesList');
+                notesList.innerHTML = '';  // Clear any existing notes
+
+                data.forEach(item => {
+                    if (item.name.endsWith('.txt')) {
+                        const noteLink = document.createElement('a');
+                        noteLink.href = item.html_url;
+                        noteLink.textContent = item.name;
+                        noteLink.target = '_blank';  // Open in a new tab
+                        noteLink.classList.add('note-item');
+                        
+                        notesList.appendChild(noteLink);
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching notes:', error));
     </script>
 </body>
 </html>
