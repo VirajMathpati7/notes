@@ -1,0 +1,37 @@
+Active Directory
+
+Domain Controller - is a service with the AD DS installed that has specifically
+been promoted to a domain controller
+
+- host a copy of the ADDS directory store
+- provide authentication and authorization services
+- allow administrative access to manage user accounts and networks resources
+
+common attack --> 
+
+                             [&] Golden ticket attacks
+						|
+						|_ _ attacker exploit Kerberos protocol and impersonate any account on the AD by forging Ticket Granting Ticket(TGT).  they uses password hash.
+
+attacker requires this much of information to do this attack
+1.  FQDN - Fully Qualified Domain Name
+2.  SID of the domain
+3.  Username of an account to impersonate
+4.  KRBTGT account password hash
+
+detection of this type of attack 
+* Event ID 4768: looks for TGT request for high-privilege accounts
+* Event ID 4672: this logs when special privileges( like SeTcbPrivilege) are assigned to a user
+
+				[&] Pass-the-hash 
+					|
+					|_ _ stealing hash of the pass and used to authenticate to services without needing actual password.
+the NTLM protocol allows authentication based on password hashes.
+
+mitigation of this type of attacks
+1. enforcing strong password policies 
+2. regularly audits on privileges and multi-factor authentication
+
+				 [&] Kerberoasting
+						|
+						|_ _ attacker request service tickets for account with service principal names (SPNs), extracts the tickets and password hashes, and then attempts to crack them offline to retrieve the plain text passwords.

@@ -1,0 +1,97 @@
+Path traversal 
+ Linux
+../../../etc/passwd
+
+Windows
+../../../../boot.ini
+../../../../windows/win.ini
+
+
+OS files
+
+/etc/issue - contains a message or system identification to be printed before the login prompt.
+
+/etc/passwd - has all registered user that has access to a system.
+
+/etc/shadow - contains information about users' passwords
+
+/root/.bash_history - contains the history commands for root user
+
+/root/.ssh/id_rsa - private ssh keys for a root or known valid user on the server
+
+c:\boot.ini - contains boot options for computers with BIOS firmware
+
+
+** LFI - Local File inclusion
+
+
+1. when web application provides languages....
+	
+	<?PHP
+	   include($_GET["lang"]);
+	?>
+
+above code uses GET request via URL parameter lang
+
+the request call is like https://webapp.thm/index.php?lang=EN.php
+
+in above code case there is no specified directory in include function and no input validation.	
+
+       :> here we can access and display any readable file if there isn't any input validation.
+
+
+2. perform black box testing , we don't have source code
+
+	- wrong input can disclose useful information
+	
+exploitation - use "../" 
+
+http://webapp.thm/index.php?lang=../../../../etc/passwd
+
+-- Note that we used 4 "../" because we know the path has four levels /var/www/html/THM-4. But we still receive the following error:
+
+/*Warning: include(languages/../../../../../etc/passwd.php): failed to open stream: No such file or directory in /var/www/html/THM-4/index.php on line 12 */
+
+It seems we could move out of the PHP directory but still, the include function reads the input with .php at the end! 
+
+This tells us that the developer specifies the file type to pass to the include function. To bypass this scenario, we can use the 'NULL BYTE', which is %00.
+
+Using null bytes is an injection technique 
+
+where URL-encoded representation such as %00 or 0x00 in hex with user-supplied data to terminate strings. 
+You could think of it as trying to trick the web app into disregarding whatever comes after the Null Byte.
+
+By adding the Null Byte at the end of the payload, we tell the  include function to ignore anything after the null byte which may look like:
+
+include("languages/../../../../../etc/passwd%00").".php"); 
+
+which equivalent to → include("languages/../../../../../etc/passwd");
+
+NOTE: the %00 trick is fixed and not working with PHP 5.3.4 and above.
+ 
+
+3. if developer filters specific keywords like ' /etc/passwd ' is filtered then 
+	- we can use %00 i.e NULL BYTE
+	- or the current directory trick 
+		|_ if we do 'cd..' we go one step back, or if we do 'cd .' we stays in same directory same for /etc/passwd/.. , it goes '/etc/'
+
+for that we do /etc/passwd/.  so it will stay in same directory and display content
+
+
+4. some times developer filters the '../' 
+
+	to bypass this we can use the ....//....//....//....//etc/passwd.
+
+5. some times the actual folder directory we have to put there then it will get exploit
+
+NOTE - sometime also change the request method.  e.g) POST, GET.
+
+
+** RFI - Remote File Execution
+
+here also like LFI , 'include' function allows attacker to inject external URL.
+
+but Condition is - the 'allow_url_fopen' option needs to be ON 
+
+RFI vulnerability can allow attacker to RCE(remote code execution)
+

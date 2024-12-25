@@ -1,0 +1,6 @@
+how the api is created 
+
+so every api which we have used in this project has divided in three parts 
+1 - controller
+2 - service implementation
+3 - 
