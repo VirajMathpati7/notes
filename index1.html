@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Notes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <button id="backButton">Back</button>
+        <div id="notesList" class="notes-list"></div>
+    </div>
+    <script>
+        // Dummy notes, replace with actual notes or fetch from a server
+        const notes = [
+            'Note 1: This is the content of note 1.',
+            'Note 2: This is the content of note 2.',
+            'Note 3: This is the content of note 3.'
+        ];
+
+        const notesList = document.getElementById('notesList');
+        notes.forEach(note => {
+            const noteDiv = document.createElement('div');
+            noteDiv.classList.add('note-item');
+            noteDiv.textContent = note;
+            notesList.appendChild(noteDiv);
+        });
+
+        document.getElementById('backButton').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
