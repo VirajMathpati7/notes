@@ -17,22 +17,23 @@
         });
 
         // Simulating dynamically listing files from the repository's notes directory
-        fetch('https://api.github.com/repos/<your-username>/<your-repository>/contents/notes')
-            .then(response => response.json())
-            .then(data => {
-                const notesList = document.getElementById('notesList');
-                notesList.innerHTML = '';  // Clear any existing notes
+       fetch('https://api.github.com/repos/virajmathpati7/notes/contents/notes')
+    .then(response => response.json())
+    .then(data => {
+        const notesList = document.getElementById('notesList');
+        notesList.innerHTML = '';  // Clear any existing notes
 
-                data.forEach(item => {
-                    if (item.name.endsWith('.txt')) {
-                        const noteDiv = document.createElement('div');
-                        noteDiv.classList.add('note-item');
-                        noteDiv.textContent = item.name;
-                        notesList.appendChild(noteDiv);
-                    }
-                });
-            })
-            .catch(error => console.error('Error fetching notes:', error));
+        data.forEach(item => {
+            if (item.name.endsWith('.txt')) {
+                const noteDiv = document.createElement('div');
+                noteDiv.classList.add('note-item');
+                noteDiv.textContent = item.name;
+                notesList.appendChild(noteDiv);
+            }
+        });
+    })
+    .catch(error => console.error('Error fetching notes:', error));
+
     </script>
 </body>
 </html>
