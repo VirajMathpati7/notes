@@ -1,0 +1,50 @@
+portswigger lab 3
+1] use burp to check which html tags and events are blocked by WAF ( Intruder )
+		|_ set position at parameter and copy the xss cheat sheets all html tags from portswigger. (200 ok response)
+		|_ set position of event according to html tag and check for 200 ok resonse.
+....................................................................................................................................................................................................................
+
+Check if the web app has the CSP (content security policy)header set.
+	|_ it is mechanism which tells the scripts or resources can execute on the page or not.
+
+# Reflected DOM xss.
+		|_ check for eval() is used i application.
+		|_ if the source code not showing the input parameter so check for other js files in which output of given input related it. 			|
+					|_ search term = "hello".     if code not showing then check for js files like    /resources/searchTerm.js which contains function of the search term parameter.
+
+	Notes: character escaping is very important in filter bypass.
+
+
+# Jquery DOM xss
+
+location.search source:
+
+    <script>
+                            $(function() {
+                                $('#backLink').attr("href", (new URLSearchParams(window.location.search)).get('returnPath'));
+                            });
+       </script>
+
+Note: -- >here the attr() function of Jquery library can change the DOM objects and it causes xss.
+						|
+						|_the data is read from user-controlled source like URL and passed to attr() function, which may cause XSS.
+
+reflected xss for Angle Bracket encoded- " autofocus onfocus=alert(document.domain) x="
+
+
+reflected xss
+
+-- parameters in url query
+-- url file path
+-- sometimes http headers
+
+stored xss
+
+-- comments on a blog
+-- user profile information
+-- website listings
+
+dom xss
+
+-- 
+

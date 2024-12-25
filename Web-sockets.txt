@@ -1,0 +1,33 @@
+Web-sockets
+   |	|_commonly used in modern web applications for st
+reaming data  and other asynchronous traffic. e.g) Stock market feeds.
+   |_it is a bi-directional.
+   |_full duplex communication protocol initiated over HTTP.
+
+WebSocket connection are normally created using client side java script -->
+
+     var ws = new WebSocket("wss://normal-website.com/chat");
+
+note: 
+1. "wss protocol establishes a WebSocket over an encrypted TLS(transport layer security) connection. ws protocol uses an unencrypted connection.
+
+--------------------------------------------------------------------------------------------------------------------
+GET /chat HTTP/1.1
+Host: normal-website.com
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Key: wDqumtseNBJdhkihL6PW7w==
+Connection: keep-alive, Upgrade
+Cookie: session=KOsEJNuflw4Rd9BDNrVmvwBF9rEijeE2
+Upgrade: websocket
+
+Response:-->
+HTTP/1.1 101 Switching Protocols
+Connection: Upgrade
+Upgrade: websocket
+Sec-WebSocket-Accept: 0FFP+2nmNIf/h+4BP36k9uzrYGk=
+
+Key Points :::> 
+1. The CONNECTION and UPGRADE headers in the request and response indicate that this is a WebSocket handshake. 
+ 2. The SEC-WEBSOCKET-VERSION request header specifies the WebSocket protocol version that the client wishes to use. 
+  3. The SEC-WEBSOCKET-KEY request header contains a Base64-encoded random value, which should be randomly generated in each handshake request.
+    4. The SEC-WEBSOCKET-ACCEPT response header contains a hash of the value submitted in the SEC-WEBSOCKET-KEY request header, concatenated with a specific string defined in the protocol specification. This is done to prevent misleading responses resulting from misconfigured servers or caching proxies. 

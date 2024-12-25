@@ -1,0 +1,108 @@
+XML - Extensible markup language
+
+DTD - document type definition 
+   |_contains declarations that can define structure of document., the types of data values it can contain and other items.
+   |_ 
+
+
+XML custom entities  --  <!DOCTYPE  abc [ <! ENTITY viraj "my entity value">  ]>
+                                                                                              |                                        |
+											      |_random value.   |__ any usage of the entity reference &viraj;  within the XML document will be replaced with the defined value: "my entity value".
+
+ex)  <!DOCTYPE  xyz  [ <!ENTITY viraj "value"> ] >.
+                                             |_we can use the value in XML document using the variable &xyz. 
+
+
+
+
+
++++ EXTERNAL XML ENTITY +++							_ URL or Path of the value of entity should be loaded.
+																	|														 |
+<!DOCTYPE xyz [  <!ENTITY  viraj  SYSTEM "file://path/of/destination">   ] >							         |
+												|_ SYSTEM keyword is use for declaration of external entity.		 |
+												 _ _|																	 	 |
+												|																			 |
+<!DOCTYPE xyz [  <!ENTITY  viraj  SYSTEM "file://path/of/destination">   ] >								 |
+																			|												 |
+																			|________________________________|
+
+
+how this vulnerability arises?
+--> -  some appl.  uses XML formate to transmit data from browser to server. 
+	- potentially dangerous features and stander parsers supports these features.
+
+
+Types:  - exploiting XXE to  
+								- retrieve files.
+								- to perform SSRF.
+								- blind XXE to exfiltrate data out-of-band.
+								- blind XXE to retrieve data via error messages.
+
+
+
+1) retrieve files ~  XXE injection that retrieves an Arbitrary file from server's filesystem,
+																								|_ we have to modify the Submitted XML in two ways:
+
+--  Introduce a DOCTYPE element that defines an external entity containing the path to the file.
+
+--  Edit a data value in the XML that is returned in the applications response , to make use of the defined external entity.
+																										|_use of ampersand(&).
+
+ + + refer Portswigger ->  https://portswigger.net/web-security/xxe#exploiting-xxe-to-retrieve-files.
+
+
+2) ++ refer portswigger-> https://portswigger.net/web-security/xxe#exploiting-xxe-to-perform-ssrf-attacks.
+
+
+
+3) Blind XXE - application is vulnerable to XXE injection but does not return the values of any defined external entities within its responses.
+
+ 		-- two ways to find blind XXE
+	a) you can trigger out-of-band(OAST- > out-of-band Application security testing ) network interactions .
+	        |
+		|_ we have to use here burpsuit collaborator i.e the public server which gives a DNS to retrive the HTTP response from the server.	
+
+
+
+
+
+
+
+
+
+ADVENT of CYBER 2024
+
+
+there was a website where a wishlist.php was created with vulnerable to XML 
+and 
+
+it is product?id=1 like function was running on that 
+
+so in that we have inserted a simple xml to endpoint to retrieve the flag so that was 
+
+<!DOCTYPE abc [ <! ENTITY payload "/var/www/html/wishes/wish_22.txt">  ]>
+
+after that is was giving the wishes which we are give to the product, so this is vulnerable that it shows private data of other user wishes. so that it 
+
+then we bruteforce to the number parameter i.e wish_22.txt and send to intruder and make it to 1 to 20 request with each
+so one of them request got flag.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
