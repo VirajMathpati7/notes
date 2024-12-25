@@ -8,9 +8,12 @@
 </head>
 <body>
     <div class="container">
-        <button id="notesButton">Access My Notes</button>
-        <div id="notesList" class="notes-list"></div>
+        <button id="accessNotesButton">Access My Notes</button>
     </div>
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('accessNotesButton').addEventListener('click', function() {
+            window.location.href = 'notes.html';
+        });
+    </script>
 </body>
 </html>
