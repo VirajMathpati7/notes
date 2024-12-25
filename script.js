@@ -5,7 +5,7 @@ const folderPath = "web"; // Path to the folder within your repo
 
 // Function to fetch and display files from the folder
 async function fetchFiles() {
-  const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${folderPath}`;
+  const apiUrl = `https://api.github.com/repos/VirajMathpati7/notes/contents/web`;
 
   try {
     const response = await fetch(apiUrl);
