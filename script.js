@@ -1,41 +1,41 @@
-// Array to hold notes (you can replace this with dynamic fetching)
-const notes = [
-    { title: "Day 1 Notes", link: "notes/day1.pdf", date: "2024-12-24" },
-    { title: "Day 2 Notes", link: "notes/day2.pdf", date: "2024-12-25" },
-  ];
-  
-  // Function to load notes dynamically
-  function loadNotes() {
-    const notesList = document.getElementById('notes-list');
-    notesList.innerHTML = notes
-      .map(note => `
-        <div class="note-item">
-          <h3>${note.title}</h3>
-          <p>${note.date}</p>
-          <a href="${note.link}" target="_blank">View Note</a>
-        </div>
-      `)
-      .join('');
+// Configuration
+const username = "VirajMathpati7"; // Replace with your GitHub username
+const repo = "notes"; // Replace with your repository name
+const folderPath = "web"; // Path to the folder within your repo
+
+// Function to fetch and display files from the folder
+async function fetchFiles() {
+  const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${folderPath}`;
+
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch files: ${response.status}`);
+    }
+
+    const files = await response.json();
+
+    // Get the container element
+    const container = document.getElementById("files-container");
+
+    // Clear the container
+    container.innerHTML = "";
+
+    // Loop through each file and display it
+    files.forEach(file => {
+      if (file.type === "file") {
+        const fileLink = document.createElement("a");
+        fileLink.href = file.download_url; // File's direct download URL
+        fileLink.target = "_blank";
+        fileLink.textContent = file.name; // File name as the link text
+        fileLink.style.display = "block"; // Add some spacing
+        container.appendChild(fileLink);
+      }
+    });
+  } catch (error) {
+    console.error("Error fetching files:", error);
   }
-  
-  // Filter notes based on search input
-  function filterNotes() {
-    const search = document.getElementById('search').value.toLowerCase();
-    const filteredNotes = notes.filter(note =>
-      note.title.toLowerCase().includes(search)
-    );
-    const notesList = document.getElementById('notes-list');
-    notesList.innerHTML = filteredNotes
-      .map(note => `
-        <div class="note-item">
-          <h3>${note.title}</h3>
-          <p>${note.date}</p>
-          <a href="${note.link}" target="_blank">View Note</a>
-        </div>
-      `)
-      .join('');
-  }
-  
-  // Load notes on page load
-  window.onload = loadNotes;
-  
+}
+
+// Call the function on page load
+window.onload = fetchFiles;
