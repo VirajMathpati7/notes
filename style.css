@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  header {
+    background-color: #0078d4;
+    color: white;
+    padding: 1em;
+    text-align: center;
+  }
+  
+  header input {
+    margin-top: 10px;
+    padding: 8px;
+    width: 90%;
+    max-width: 500px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  main {
+    padding: 1em;
+  }
+  
+  #notes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1em;
+  }
+  
+  .note-item {
+    background-color: white;
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .note-item a {
+    text-decoration: none;
+    color: #0078d4;
+  }
+  
+  footer {
+    text-align: center;
+    margin-top: 2em;
+    color: gray;
+  }
+  
