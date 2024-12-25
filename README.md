@@ -1,1 +1,1 @@
-# this repository can help you for bug hunting.
+# This repository can help you for bug hunting.
