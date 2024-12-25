@@ -1,30 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Notes</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    h1 {
-      text-align: center;
-    }
-    #files-container a {
-      text-decoration: none;
-      color: #007BFF;
-      margin: 5px 0;
-    }
-    #files-container a:hover {
-      text-decoration: underline;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Notes</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>My Notes</h1>
-  <div id="files-container">Loading notes...</div>
-  <script src="script.js"></script>
+    <div class="container">
+        <button id="notesButton">Access My Notes</button>
+        <div id="notesList" class="notes-list"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
