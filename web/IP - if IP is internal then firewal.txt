@@ -1,2 +1,0 @@
-<IP> - if IP is internal then firewall bypass
-how to define ip is internal ip or firewall ip -> go to whois.com then paste ip and check the provided details is of the hosting company or the self bug bounty company.
